@@ -9,7 +9,7 @@
 
 using namespace std;
 
-//Функция перевода числа до 255 в 16-ричную СС
+//Р¤СѓРЅРєС†РёСЏ РїРµСЂРµРІРѕРґР° С‡РёСЃР»Р° РґРѕ 255 РІ 16-СЂРёС‡РЅСѓСЋ РЎРЎ
 inline void convert10to16(char* C, BYTE* A)
 {
 	for (int i = 0, j = 0; i < 12, j < 6; i += 2, j++)
@@ -180,7 +180,7 @@ inline void readInfoFromFile()
 
 	while (1)
 	{
-		//считывание
+		//СЃС‡РёС‚С‹РІР°РЅРёРµ
 		fin.getline(C.Name, nameLength, '\t');
 		fin.getline(C.IP_address, IPLength, '\t');
 		for (int i = 0; i < 5; i++)
@@ -192,7 +192,7 @@ inline void readInfoFromFile()
 		C.MAC_address10[5] = atoi(buff);
 		fin.getline(C.MAC_address16, MAC16Length, '\n');
 
-		//вывод
+		//РІС‹РІРѕРґ
 		cout << C.Name << '\t' << C.IP_address << '\t' << C.MAC_address16 << '\t';
 		for (int i = 0; i < 5; i++)
 			cout << C.MAC_address10[i] << '-';
@@ -203,7 +203,7 @@ inline void readInfoFromFile()
 	fin.close();
 }
 
-//Проверяем включен ли компьютер
+//РџСЂРѕРІРµСЂСЏРµРј РІРєР»СЋС‡РµРЅ Р»Рё РєРѕРјРїСЊСЋС‚РµСЂ
 inline ULONG PING(char* IP)
 {
 	HANDLE hIcmpFile;
@@ -272,12 +272,12 @@ inline void getObjectsFromFile(vector<computer> &vecComp)
 
 inline std::vector<char> makeString(computer C)
 {
-	//вспомогательные переменные
+	//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ
 	char buff[4];
 	char Ca;
 	vector <char> String1;
 
-	//Записываем имя компьютера
+	//Р—Р°РїРёСЃС‹РІР°РµРј РёРјСЏ РєРѕРјРїСЊСЋС‚РµСЂР°
 	for (int i = 0; i < strlen(C.Info.Name); i++)
 	{
 		String1.push_back(Ca);
@@ -286,7 +286,7 @@ inline std::vector<char> makeString(computer C)
 	String1.push_back('\t');
 	String1.push_back('\t');
 
-	//Записываем IP-адресс
+	//Р—Р°РїРёСЃС‹РІР°РµРј IP-Р°РґСЂРµСЃСЃ
 	for (int i = String1.size(), j = 0; i < (strlen(C.Info.IP_address) + String1.size()), j < strlen(C.Info.IP_address); i++, j++)
 	{
 		String1.push_back(Ca);
@@ -294,7 +294,7 @@ inline std::vector<char> makeString(computer C)
 	}
 	String1.push_back('\t');
 
-	//Записываем MAC-адресс в 10-чной форме
+	//Р—Р°РїРёСЃС‹РІР°РµРј MAC-Р°РґСЂРµСЃСЃ РІ 10-С‡РЅРѕР№ С„РѕСЂРјРµ
 	for (int i = 0; i < 5; i++)
 	{
 		_itoa(C.Info.MAC_address10[i], buff, 10);
@@ -313,7 +313,7 @@ inline std::vector<char> makeString(computer C)
 	}
 	String1.push_back('\t');
 
-	//Записывем MAC-адресс в 16-чной форме
+	//Р—Р°РїРёСЃС‹РІРµРј MAC-Р°РґСЂРµСЃСЃ РІ 16-С‡РЅРѕР№ С„РѕСЂРјРµ
 	for (int i = 0; i < 10; i += 2)
 	{
 		for (int k = String1.size(), j = 0; k < (2 + String1.size()), j < 2; k++, j++)
