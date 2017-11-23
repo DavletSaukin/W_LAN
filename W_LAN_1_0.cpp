@@ -12,8 +12,8 @@
 #define ID_BTN_5 5
 
 
-LONG WINAPI WndProc(HWND, UINT, WPARAM, LPARAM); // функция обработки сообщений окна
-BOOL CALLBACK DlgProc(HWND, UINT, WPARAM, LPARAM); //функция обработки сообщений диалога
+LONG WINAPI WndProc(HWND, UINT, WPARAM, LPARAM); // С„СѓРЅРєС†РёСЏ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёР№ РѕРєРЅР°
+BOOL CALLBACK DlgProc(HWND, UINT, WPARAM, LPARAM); //С„СѓРЅРєС†РёСЏ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёР№ РґРёР°Р»РѕРіР°
 
 
 
@@ -21,33 +21,33 @@ static SOCKET S;
 WSADATA Ws;
 
 /*---------------- 
-Стартовая функция
+РЎС‚Р°СЂС‚РѕРІР°СЏ С„СѓРЅРєС†РёСЏ
 -----------------*/
 int  PASCAL  WinMain(HINSTANCE  hInstance,
 	HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	HWND hwnd; // дескриптор окна
-	MSG msg;   // структура сообщения
-	WNDCLASS w; // структура класса окна
+	HWND hwnd; // РґРµСЃРєСЂРёРїС‚РѕСЂ РѕРєРЅР°
+	MSG msg;   // СЃС‚СЂСѓРєС‚СѓСЂР° СЃРѕРѕР±С‰РµРЅРёСЏ
+	WNDCLASS w; // СЃС‚СЂСѓРєС‚СѓСЂР° РєР»Р°СЃСЃР° РѕРєРЅР°
 	RECT desctopRect;
 	GetWindowRect(GetDesktopWindow(), &desctopRect);
 	COLORREF backGroundColor = RGB(23, 72, 104);
-	memset(&w, 0, sizeof(WNDCLASS)); // очистка памяти для структуры
+	memset(&w, 0, sizeof(WNDCLASS)); // РѕС‡РёСЃС‚РєР° РїР°РјСЏС‚Рё РґР»СЏ СЃС‚СЂСѓРєС‚СѓСЂС‹
 	w.style = CS_HREDRAW | CS_VREDRAW;
 	w.lpfnWndProc = WndProc;
 	w.hInstance = hInstance;
 	w.hbrBackground = CreateSolidBrush(backGroundColor);
 	w.lpszClassName = "MyClass";
-	RegisterClass(&w); // регистрация класса окна
-	 // Создание окна
-	hwnd = CreateWindow("MyClass", "W_LAN Cаукин Д. О.",
+	RegisterClass(&w); // СЂРµРіРёСЃС‚СЂР°С†РёСЏ РєР»Р°СЃСЃР° РѕРєРЅР°
+	 // РЎРѕР·РґР°РЅРёРµ РѕРєРЅР°
+	hwnd = CreateWindow("MyClass", "W_LAN CР°СѓРєРёРЅ Р”. Рћ.",
 		WS_OVERLAPPEDWINDOW,
 		desctopRect.left, desctopRect.top, desctopRect.right, desctopRect.bottom - 40,
 		NULL, NULL, hInstance, NULL);
-	ShowWindow(hwnd, nCmdShow); // отображение окна
-	UpdateWindow(hwnd);         // перерисовка окна
+	ShowWindow(hwnd, nCmdShow); // РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РѕРєРЅР°
+	UpdateWindow(hwnd);         // РїРµСЂРµСЂРёСЃРѕРІРєР° РѕРєРЅР°
 
-	// Цикл обработки сообщений
+	// Р¦РёРєР» РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёР№
 	while (GetMessage(&msg, NULL, 0, 0)) {
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
@@ -56,7 +56,7 @@ int  PASCAL  WinMain(HINSTANCE  hInstance,
 }
 
 /*-------------------------
-Функция обработки сообщений
+Р¤СѓРЅРєС†РёСЏ РѕР±СЂР°Р±РѕС‚РєРё СЃРѕРѕР±С‰РµРЅРёР№
 --------------------------*/
 LONG WINAPI WndProc(HWND hwnd, UINT Message,
 	WPARAM wparam, LPARAM lparam)
@@ -69,9 +69,9 @@ LONG WINAPI WndProc(HWND hwnd, UINT Message,
 	PAINTSTRUCT ps;
 	HDC hdc;
 
-	static HWND hBtn1, hBtn2, hBtn3, hBtn4, hBtn5; // дескрипторы кнопок
-	static HWND hEdit; // дескриптор поля ввода
-	static HWND hList1, hInfoWindow; // дескрипторы списка и инф. окна
+	static HWND hBtn1, hBtn2, hBtn3, hBtn4, hBtn5; // РґРµСЃРєСЂРёРїС‚РѕСЂС‹ РєРЅРѕРїРѕРє
+	static HWND hEdit; // РґРµСЃРєСЂРёРїС‚РѕСЂ РїРѕР»СЏ РІРІРѕРґР°
+	static HWND hList1, hInfoWindow; // РґРµСЃРєСЂРёРїС‚РѕСЂС‹ СЃРїРёСЃРєР° Рё РёРЅС„. РѕРєРЅР°
 	char* IPstr = new char[17];
 	RECT rekt;
 	int editLength;
@@ -80,13 +80,13 @@ LONG WINAPI WndProc(HWND hwnd, UINT Message,
 	{
 
 	}
-	//создание сокета
+	//СЃРѕР·РґР°РЅРёРµ СЃРѕРєРµС‚Р°
 	if (INVALID_SOCKET == (S = socket(AF_INET, SOCK_DGRAM, 0)))
 	{
 
 	}
 
-	//Заполняем Вектор элементами
+	//Р—Р°РїРѕР»РЅСЏРµРј Р’РµРєС‚РѕСЂ СЌР»РµРјРµРЅС‚Р°РјРё
 	getObjectsFromFile(vecComp);
 	vecComp.shrink_to_fit();
 	sortVecComp(vecComp);
@@ -94,43 +94,43 @@ LONG WINAPI WndProc(HWND hwnd, UINT Message,
 
 	switch (Message)
 	{
-	case WM_CREATE: // сообщение создания окна
-		hInst = ((LPCREATESTRUCT)lparam)->hInstance; // дескриптор приложения
+	case WM_CREATE: // СЃРѕРѕР±С‰РµРЅРёРµ СЃРѕР·РґР°РЅРёСЏ РѕРєРЅР°
+		hInst = ((LPCREATESTRUCT)lparam)->hInstance; // РґРµСЃРєСЂРёРїС‚РѕСЂ РїСЂРёР»РѕР¶РµРЅРёСЏ
 		GetWindowRect(hwnd, &rekt);
-		//список компьютеров
+		//СЃРїРёСЃРѕРє РєРѕРјРїСЊСЋС‚РµСЂРѕРІ
 		hList1 = CreateWindow("listbox", NULL, WS_CHILD | WS_VISIBLE | LBS_STANDARD | LBS_WANTKEYBOARDINPUT |
 			LBS_USETABSTOPS, 10, 10, rekt.right - 200, rekt.bottom - 200,
 			hwnd, (HMENU)ID_LIST, hInst, NULL);
 		ShowWindow(hList1, SW_SHOWNORMAL);
-		// статические информационные окна
+		// СЃС‚Р°С‚РёС‡РµСЃРєРёРµ РёРЅС„РѕСЂРјР°С†РёРѕРЅРЅС‹Рµ РѕРєРЅР°
 		hInfoWindow = CreateWindow("edit", NULL, WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | ES_AUTOVSCROLL | 
 			ES_READONLY | ES_MULTILINE, 10, rekt.bottom - 150, rekt.right - 50, 140, hwnd, 0, hInst, NULL);
 		ShowWindow(hInfoWindow, SW_SHOWNORMAL);
 		hEdit = CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_LEFT,
 			rekt.right - 170, 10, 120, 30, hwnd, 0, hInst, NULL);
 		ShowWindow(hEdit, SW_SHOWNORMAL);
-		//кнопка 1
-		hBtn1 = CreateWindow("button", "Найти", WS_CHILD | WS_VISIBLE | WS_BORDER,
+		//РєРЅРѕРїРєР° 1
+		hBtn1 = CreateWindow("button", "РќР°Р№С‚Рё", WS_CHILD | WS_VISIBLE | WS_BORDER,
 			rekt.right - 170, 50, 120, 30, hwnd, (HMENU)ID_BTN_1, hInst, NULL);
 		ShowWindow(hBtn1, SW_SHOWNORMAL);
-		//кнопка 2
-		hBtn2 = CreateWindow("button", "Включить", WS_CHILD | WS_VISIBLE | WS_BORDER,
+		//РєРЅРѕРїРєР° 2
+		hBtn2 = CreateWindow("button", "Р’РєР»СЋС‡РёС‚СЊ", WS_CHILD | WS_VISIBLE | WS_BORDER,
 			rekt.right - 170, 90, 120, 30, hwnd, (HMENU)ID_BTN_2, hInst, NULL);
 		ShowWindow(hBtn2, SW_SHOWNORMAL);
-		//кнопка 3
-		hBtn3 = CreateWindow("button", "Выключить", WS_CHILD | WS_VISIBLE | WS_BORDER,
+		//РєРЅРѕРїРєР° 3
+		hBtn3 = CreateWindow("button", "Р’С‹РєР»СЋС‡РёС‚СЊ", WS_CHILD | WS_VISIBLE | WS_BORDER,
 			rekt.right - 170, 130, 120, 30, hwnd, (HMENU)ID_BTN_3, hInst, NULL);
 		ShowWindow(hBtn3, SW_SHOWNORMAL);
-		//кнопка 4
+		//РєРЅРѕРїРєР° 4
 		hBtn4 = CreateWindow("button", "PING", WS_CHILD | WS_VISIBLE | WS_BORDER,
 			rekt.right - 170, 170, 120, 30, hwnd, (HMENU)ID_BTN_4, hInst, NULL);
 		ShowWindow(hBtn4, SW_SHOWNORMAL);
-		//кнопка 5
-		hBtn5 = CreateWindow("button", "Выключить ко времени", WS_CHILD | WS_VISIBLE | WS_BORDER |
+		//РєРЅРѕРїРєР° 5
+		hBtn5 = CreateWindow("button", "Р’С‹РєР»СЋС‡РёС‚СЊ РєРѕ РІСЂРµРјРµРЅРё", WS_CHILD | WS_VISIBLE | WS_BORDER |
 			BS_MULTILINE, rekt.right - 170, 210, 120, 50, hwnd, (HMENU)ID_BTN_4, hInst, NULL);
 		ShowWindow(hBtn4, SW_SHOWNORMAL);
 
-		//заполняем список элементами
+		//Р·Р°РїРѕР»РЅСЏРµРј СЃРїРёСЃРѕРє СЌР»РµРјРµРЅС‚Р°РјРё
 		SendMessage(hList1, WM_SETREDRAW, FALSE, 0L);
 		for (int i = 0; i < vecSize; i++)
 		{
@@ -141,31 +141,31 @@ LONG WINAPI WndProc(HWND hwnd, UINT Message,
 		InvalidateRect(hList1, NULL, TRUE);
 
 		break;
-	case WM_COMMAND:  // сообщение о команде
-		if (lparam == (LPARAM)hBtn1)    // если нажали на кнопку 1
+	case WM_COMMAND:  // СЃРѕРѕР±С‰РµРЅРёРµ Рѕ РєРѕРјР°РЅРґРµ
+		if (lparam == (LPARAM)hBtn1)    // РµСЃР»Рё РЅР°Р¶Р°Р»Рё РЅР° РєРЅРѕРїРєСѓ 1
 		{
 			editLength = GetWindowText(hEdit, IPstr, 17);
 			if (editLength != 0)
 			{
-				if (0 == PING(&IPstr[1])) //если компьютер включен
+				if (0 == PING(&IPstr[1])) //РµСЃР»Рё РєРѕРјРїСЊСЋС‚РµСЂ РІРєР»СЋС‡РµРЅ
 				{
 					computer C(&IPstr[1], S, Ws);
-					if (addNewItemInFile(C)) //если компьютера нет в списке
+					if (addNewItemInFile(C)) //РµСЃР»Рё РєРѕРјРїСЊСЋС‚РµСЂР° РЅРµС‚ РІ СЃРїРёСЃРєРµ
 					{
 						vecComp.push_back(C);
 						std::vector <char> stringOfList = makeString(C);
 						SendMessage(hList1, LB_ADDSTRING, 0, (LPARAM)&stringOfList[0]);
 					}
 					else
-						MessageBox(hwnd, "Элемент уже существует", "Ошибка", MB_OK);
+						MessageBox(hwnd, "Р­Р»РµРјРµРЅС‚ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚", "РћС€РёР±РєР°", MB_OK);
 				}
 				else
 				{
-					MessageBox(hwnd, "Запрашиваемый удалённый компьютер должен быть включен", "Ошибка", MB_OK);
+					MessageBox(hwnd, "Р—Р°РїСЂР°С€РёРІР°РµРјС‹Р№ СѓРґР°Р»С‘РЅРЅС‹Р№ РєРѕРјРїСЊСЋС‚РµСЂ РґРѕР»Р¶РµРЅ Р±С‹С‚СЊ РІРєР»СЋС‡РµРЅ", "РћС€РёР±РєР°", MB_OK);
 				}
 			}
 		}
-		//кнопку 2
+		//РєРЅРѕРїРєСѓ 2
 		if (lparam == (LPARAM)hBtn2)
 		{
 			currVecCompElem = SendMessage(hList1, LB_GETCARETINDEX, 0, 0L);
@@ -174,32 +174,32 @@ LONG WINAPI WndProc(HWND hwnd, UINT Message,
 				MessageBox(hwnd, "WAKE_UP ERROR", "Error", MB_OK);
 			SendMessageA(hList1, WM_CHILDACTIVATE, 0, 0L);
 
-			//фомируем строку
-			strcat(outputBuff, "включить ");
+			//С„РѕРјРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ
+			strcat(outputBuff, "РІРєР»СЋС‡РёС‚СЊ ");
 			strcat(outputBuff, vecComp[currVecCompElem].Info.Name);
 			strcat(outputBuff, "\r\n");
 			SetWindowTextA(hInfoWindow, outputBuff);
-			//свёртка полосы прокрутки вниз
+			//СЃРІС‘СЂС‚РєР° РїРѕР»РѕСЃС‹ РїСЂРѕРєСЂСѓС‚РєРё РІРЅРёР·
 			int lineCount = SendMessageA(hInfoWindow, EM_GETLINECOUNT, 0, 0L);
 			SendMessageA(hInfoWindow, EM_LINESCROLL, 0, MAKELPARAM(lineCount, 0));
 
 		}
-		//кнопку 3
+		//РєРЅРѕРїРєСѓ 3
 		if (lparam == (LPARAM)hBtn3)
 		{
 			currVecCompElem = SendMessage(hList1, LB_GETCARETINDEX, 0, 0L);
 			InitiateSystemShutdownA(vecComp[currVecCompElem].Info.Name, "", 0, TRUE, FALSE);
 			SendMessageA(hList1, WM_CHILDACTIVATE, 0, 0L);
 
-			strcat(outputBuff, "выключить ");
+			strcat(outputBuff, "РІС‹РєР»СЋС‡РёС‚СЊ ");
 			strcat(outputBuff, vecComp[currVecCompElem].Info.Name);
 			strcat(outputBuff, "\r\n");
 			SetWindowTextA(hInfoWindow, outputBuff);
-			//свёртка полосы прокрутки вниз
+			//СЃРІС‘СЂС‚РєР° РїРѕР»РѕСЃС‹ РїСЂРѕРєСЂСѓС‚РєРё РІРЅРёР·
 			int lineCount = SendMessageA(hInfoWindow, EM_GETLINECOUNT, 0, 0L);
 			SendMessageA(hInfoWindow, EM_LINESCROLL, 0, MAKELPARAM(lineCount, 0));
 		}
-		//кнопку 4
+		//РєРЅРѕРїРєСѓ 4
 		if (lparam == (LPARAM)hBtn4)
 		{
 			currVecCompElem = SendMessage(hList1, LB_GETCARETINDEX, 0, 0L);
@@ -212,10 +212,10 @@ LONG WINAPI WndProc(HWND hwnd, UINT Message,
 				SendMessage(hwnd, MSG_PING, 0, 0L);
 			}
 		}
-		//кнопку 5
+		//РєРЅРѕРїРєСѓ 5
 		if (lparam == (LPARAM)hBtn5)
 		{
-			// Создаем модальную диалоговую панель
+			// РЎРѕР·РґР°РµРј РјРѕРґР°Р»СЊРЅСѓСЋ РґРёР°Р»РѕРіРѕРІСѓСЋ РїР°РЅРµР»СЊ
 			DialogBox(hInst, "SELECT", hwnd, (DLGPROC)DlgProc);
 		}
 		break;
@@ -231,10 +231,10 @@ LONG WINAPI WndProc(HWND hwnd, UINT Message,
 			SendMessage(hList1, LB_SETCARETINDEX, currVecCompElem--, FALSE);
 		}
 		break;
-	case WM_PAINT: // перерисовка окна
-		hdc = BeginPaint(hwnd, &ps); // начало перерисовки
+	case WM_PAINT: // РїРµСЂРµСЂРёСЃРѕРІРєР° РѕРєРЅР°
+		hdc = BeginPaint(hwnd, &ps); // РЅР°С‡Р°Р»Рѕ РїРµСЂРµСЂРёСЃРѕРІРєРё
 
-		EndPaint(hwnd, &ps); // конец перерисовки
+		EndPaint(hwnd, &ps); // РєРѕРЅРµС† РїРµСЂРµСЂРёСЃРѕРІРєРё
 		break;
 	case WM_SIZE:
 		switch (wparam)
@@ -266,30 +266,30 @@ LONG WINAPI WndProc(HWND hwnd, UINT Message,
 		if (wparam)
 		{
 			strcat(outputBuff, vecComp[currVecCompElem].Info.Name);
-			strcat(outputBuff, "  работает");
+			strcat(outputBuff, "  СЂР°Р±РѕС‚Р°РµС‚");
 			strcat(outputBuff, "\r\n");
 			SetWindowTextA(hInfoWindow, outputBuff);
-			//свёртка полосы прокрутки вниз
+			//СЃРІС‘СЂС‚РєР° РїРѕР»РѕСЃС‹ РїСЂРѕРєСЂСѓС‚РєРё РІРЅРёР·
 			int lineCount = SendMessageA(hInfoWindow, EM_GETLINECOUNT, 0, 0L);
 			SendMessageA(hInfoWindow, EM_LINESCROLL, 0, MAKELPARAM(lineCount, 0));
 		}
 		else
 		{
 			strcat(outputBuff, vecComp[currVecCompElem].Info.Name);
-			strcat(outputBuff, "  НЕ работает");
+			strcat(outputBuff, "  РќР• СЂР°Р±РѕС‚Р°РµС‚");
 			strcat(outputBuff, "\r\n");
 			SetWindowTextA(hInfoWindow, outputBuff);
-			//свёртка полосы прокрутки вниз
+			//СЃРІС‘СЂС‚РєР° РїРѕР»РѕСЃС‹ РїСЂРѕРєСЂСѓС‚РєРё РІРЅРёР·
 			int lineCount = SendMessageA(hInfoWindow, EM_GETLINECOUNT, 0, 0L);
 			SendMessageA(hInfoWindow, EM_LINESCROLL, 0, MAKELPARAM(lineCount, 0));
 		}
 		break;
 
-	case WM_DESTROY: // закрытие окна
+	case WM_DESTROY: // Р·Р°РєСЂС‹С‚РёРµ РѕРєРЅР°
 		PostQuitMessage(0);
 		break;
 		
-	default: // обработка сообщения по умолчанию
+	default: // РѕР±СЂР°Р±РѕС‚РєР° СЃРѕРѕР±С‰РµРЅРёСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 		return DefWindowProc(hwnd, Message, wparam, lparam);
 	}
 	return 0;
@@ -297,14 +297,14 @@ LONG WINAPI WndProc(HWND hwnd, UINT Message,
 
 
 /*------------------------------------
- Функция DlgProc
+ Р¤СѓРЅРєС†РёСЏ DlgProc
 ------------------------------------*/
 
 BOOL CALLBACK DlgProc(HWND hdlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
-		// Инициализация диалоговой панели
+		// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РґРёР°Р»РѕРіРѕРІРѕР№ РїР°РЅРµР»Рё
 		case WM_INITDIALOG:
 		{
 			return TRUE;
@@ -320,21 +320,21 @@ BOOL CALLBACK DlgProc(HWND hdlg, UINT msg, WPARAM wParam, LPARAM lParam)
 
 				char bufHour[3], bufMin[3];
 
-				// Сообщение от кнопки "OK"
+				// РЎРѕРѕР±С‰РµРЅРёРµ РѕС‚ РєРЅРѕРїРєРё "OK"
 				case IDOK:
 				{
-					// Получаем время из текстового редактора 
+					// РџРѕР»СѓС‡Р°РµРј РІСЂРµРјСЏ РёР· С‚РµРєСЃС‚РѕРІРѕРіРѕ СЂРµРґР°РєС‚РѕСЂР° 
 					hours = GetDlgItemInt(hdlg, IDC_HOUR, &hErr, FALSE);
 					minutes = GetDlgItemInt(hdlg, IDC_MINUTE, &mErr, FALSE);
 
 					GetDlgItemTextA(hdlg, IDC_HOUR, bufHour, 3);
 					GetDlgItemTextA(hdlg, IDC_MINUTE, bufMin, 3);
 
-					char Str[72] = "Все компьютеры будут выключены в ";
+					char Str[72] = "Р’СЃРµ РєРѕРјРїСЊСЋС‚РµСЂС‹ Р±СѓРґСѓС‚ РІС‹РєР»СЋС‡РµРЅС‹ РІ ";
 
 					if (hours > 23 || minutes > 59 || hours < 0 || minutes < 0)
 					{
-						MessageBox(hdlg, "Введите время в правильном формате", "Ошибка", MB_OK);
+						MessageBox(hdlg, "Р’РІРµРґРёС‚Рµ РІСЂРµРјСЏ РІ РїСЂР°РІРёР»СЊРЅРѕРј С„РѕСЂРјР°С‚Рµ", "РћС€РёР±РєР°", MB_OK);
 						return FALSE;
 					}
 
@@ -342,28 +342,28 @@ BOOL CALLBACK DlgProc(HWND hdlg, UINT msg, WPARAM wParam, LPARAM lParam)
 
 					if (hours < currentTime.wHour)
 					{
-						MessageBox(hdlg, "Введённый вами час уже прошёл", "Ошибка", MB_OK);
+						MessageBox(hdlg, "Р’РІРµРґС‘РЅРЅС‹Р№ РІР°РјРё С‡Р°СЃ СѓР¶Рµ РїСЂРѕС€С‘Р»", "РћС€РёР±РєР°", MB_OK);
 						return FALSE;
 					}
 
 					if ((hours == currentTime.wHour) && (minutes <= currentTime.wMinute))
 					{
-						MessageBox(hdlg, "Введённая вами минута уже прошла", "Ошибка", MB_OK);
+						MessageBox(hdlg, "Р’РІРµРґС‘РЅРЅР°СЏ РІР°РјРё РјРёРЅСѓС‚Р° СѓР¶Рµ РїСЂРѕС€Р»Р°", "РћС€РёР±РєР°", MB_OK);
 						return FALSE;
 					}
 
-					//кол-во минут до старта
+					//РєРѕР»-РІРѕ РјРёРЅСѓС‚ РґРѕ СЃС‚Р°СЂС‚Р°
 					int minutCount = (hours * 60 + minutes) - (currentTime.wHour * 60 + currentTime.wMinute);
-					//кол-во секунд до старта
+					//РєРѕР»-РІРѕ СЃРµРєСѓРЅРґ РґРѕ СЃС‚Р°СЂС‚Р°
 					int secCount = minutCount * 60;
 
-					//время выключения компьютеров
+					//РІСЂРµРјСЏ РІС‹РєР»СЋС‡РµРЅРёСЏ РєРѕРјРїСЊСЋС‚РµСЂРѕРІ
 					int timeX = time(NULL) + secCount;
 
 					strcat(Str, bufHour);
 					strcat(Str, ":");
 					strcat(Str, bufMin);
-					strcat(Str, ". Приложение будет заблокировано");
+					strcat(Str, ". РџСЂРёР»РѕР¶РµРЅРёРµ Р±СѓРґРµС‚ Р·Р°Р±Р»РѕРєРёСЂРѕРІР°РЅРѕ");
 
 					EndDialog(hdlg, 0);
 					MessageBox(hdlg, Str, "", MB_OK);
@@ -391,21 +391,21 @@ BOOL CALLBACK DlgProc(HWND hdlg, UINT msg, WPARAM wParam, LPARAM lParam)
 					}
 
 					HANDLE hToken;              
-					TOKEN_PRIVILEGES tkp;       // указатель на структуру токена
+					TOKEN_PRIVILEGES tkp;       // СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚СЂСѓРєС‚СѓСЂСѓ С‚РѕРєРµРЅР°
 
-					/* Получаем текущий дескриптор процесса, 
-					чтобы мы могли получить привилегии отключения*/
+					/* РџРѕР»СѓС‡Р°РµРј С‚РµРєСѓС‰РёР№ РґРµСЃРєСЂРёРїС‚РѕСЂ РїСЂРѕС†РµСЃСЃР°, 
+					С‡С‚РѕР±С‹ РјС‹ РјРѕРіР»Рё РїРѕР»СѓС‡РёС‚СЊ РїСЂРёРІРёР»РµРіРёРё РѕС‚РєР»СЋС‡РµРЅРёСЏ*/
 					if (!OpenProcessToken(GetCurrentProcess(),
 						TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken))
 						return FALSE;
 
-					// Получаем LUID для привелегии отключения 
+					// РџРѕР»СѓС‡Р°РµРј LUID РґР»СЏ РїСЂРёРІРµР»РµРіРёРё РѕС‚РєР»СЋС‡РµРЅРёСЏ 
 					LookupPrivilegeValue(NULL, SE_SHUTDOWN_NAME,
 						&tkp.Privileges[0].Luid);
 					tkp.PrivilegeCount = 1;  
 					tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 
-					// Получаем привелегию отключения для этого процесса
+					// РџРѕР»СѓС‡Р°РµРј РїСЂРёРІРµР»РµРіРёСЋ РѕС‚РєР»СЋС‡РµРЅРёСЏ РґР»СЏ СЌС‚РѕРіРѕ РїСЂРѕС†РµСЃСЃР°
 					AdjustTokenPrivileges(hToken, FALSE, &tkp, 0,
 						(PTOKEN_PRIVILEGES)NULL, 0);
 
@@ -413,10 +413,10 @@ BOOL CALLBACK DlgProc(HWND hdlg, UINT msg, WPARAM wParam, LPARAM lParam)
 					return TRUE;
 				}
 
-				// Отмена диалоговой панели.
+				// РћС‚РјРµРЅР° РґРёР°Р»РѕРіРѕРІРѕР№ РїР°РЅРµР»Рё.
 				case IDCANCEL:
 				{
-					// Устанавливаем флаг завершения диалога
+					// РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј С„Р»Р°Рі Р·Р°РІРµСЂС€РµРЅРёСЏ РґРёР°Р»РѕРіР°
 					EndDialog(hdlg, FALSE);
 					return TRUE;
 				}
