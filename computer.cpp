@@ -68,12 +68,12 @@ int computer::wake_up(SOCKET s, WSADATA ws)
 	sockaddr_in s_Client, s_Server;
 
 	ZeroMemory(&s_Client, sizeof(s_Client));
-	// ˜˜˜ ˜˜˜˜˜˜ (TCP/IP)
+	// Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜ (TCP/IP)
 	s_Client.sin_family = AF_INET;
-	//˜˜˜˜˜ ˜˜˜˜˜˜˜. ˜.˜. TCP/IP ˜˜˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜ ˜˜˜˜˜˜˜˜ ˜˜˜˜, ˜˜ ˜˜˜ ˜˜˜˜˜˜˜˜ 
-	// ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ inet_addr.
+	//Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜. Â˜.Â˜. TCP/IP Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜ Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜, Â˜Â˜ Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜ 
+	// Â˜Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜ inet_addr.
 	s_Client.sin_addr.s_addr = INADDR_ANY;
-	// ˜˜˜˜. ˜˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜ htons ˜˜˜ ˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜ ˜˜˜˜˜ ˜˜ ˜˜˜˜˜˜˜˜ ˜ //TCP/IP ˜˜˜˜˜˜˜˜˜˜˜˜˜.
+	// Â˜Â˜Â˜Â˜. Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜ htons Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜ Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜ Â˜ //TCP/IP Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜.
 	s_Client.sin_port = 0;
 
 	bind(s, (struct sockaddr*)&s_Client, sizeof(s_Client));
@@ -82,7 +82,7 @@ int computer::wake_up(SOCKET s, WSADATA ws)
 	s_Server.sin_addr.s_addr = inet_addr("192.168.40.255");
 	s_Server.sin_port = htons(9);
 
-	// ˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜ ˜˜˜˜˜˜˜˜˜˜:
+	// Â˜Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜ Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜Â˜:
 	if (SOCKET_ERROR == (connect(s, (sockaddr *)&s_Server, sizeof(s_Server))))
 		return 1;
 
